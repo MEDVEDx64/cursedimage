@@ -72,13 +72,13 @@ TCursedImage cursed_imgload(const char* fname)
     return out;
 }
 
-void cursed_imgsave(const char* fname, TCursedImage img)
+bool cursed_imgsave(const char* fname, TCursedImage img)
 {
     FILE* out;
     const char* file_id = FILE_ID;
     char  version = FMT_VERSION;
 
-    if((out = fopen(fname,"w+")) == NULL) return;
+    if((out = fopen(fname,"w+")) == NULL) return false;
     for(char i = 0; i < 4; i++)
         fwrite(file_id+i, 1, 1, out);
     fwrite(&version, 1, 1, out);
@@ -94,4 +94,5 @@ void cursed_imgsave(const char* fname, TCursedImage img)
         idx++;
     }
     fclose(out);
+    return true;
 }
