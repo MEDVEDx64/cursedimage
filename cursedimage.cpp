@@ -17,7 +17,7 @@ int cursed_get_coord(bool y_coord, int pos, int w)
     else        return _cur_x;
 }
 
-bool cursed_init()
+bool cursed_init(bool _nodelay)
 {
     if((initscr()) == NULL) return false;
     #ifndef NO_CBREAK
@@ -26,28 +26,10 @@ bool cursed_init()
     raw();
     #endif
     noecho(); keypad(stdscr, TRUE);
+    if(_nodelay) nodelay(stdscr, TRUE);
+
+    if(!cursed_init_color()) return false;
     curs_set(0);
-    #ifndef MONO
-    start_color();
-
-    // Initializing color pairs
-    init_pair(COL_WK, COLOR_WHITE,   COLOR_BLACK); init_pair(COL_RK, COLOR_RED,   COLOR_BLACK);
-    init_pair(COL_YK, COLOR_YELLOW,  COLOR_BLACK); init_pair(COL_GK, COLOR_GREEN, COLOR_BLACK);
-    init_pair(COL_BK, COLOR_BLUE,    COLOR_BLACK); init_pair(COL_CK, COLOR_CYAN,  COLOR_BLACK);
-    init_pair(COL_MK, COLOR_MAGENTA, COLOR_BLACK);
-
-    init_pair(COL_KW, COLOR_BLACK, COLOR_WHITE);  init_pair(COL_KR, COLOR_BLACK, COLOR_RED);
-    init_pair(COL_KY, COLOR_BLACK, COLOR_YELLOW); init_pair(COL_KG, COLOR_BLACK, COLOR_GREEN);
-    init_pair(COL_KB, COLOR_BLACK, COLOR_BLUE);   init_pair(COL_KC, COLOR_BLACK, COLOR_CYAN);
-    init_pair(COL_KM, COLOR_BLACK, COLOR_MAGENTA);
-
-    init_pair(COL_WW, COLOR_WHITE, COLOR_WHITE);  init_pair(COL_WR, COLOR_WHITE, COLOR_RED);
-    init_pair(COL_WY, COLOR_WHITE, COLOR_YELLOW); init_pair(COL_WG, COLOR_WHITE, COLOR_GREEN);
-    init_pair(COL_WB, COLOR_WHITE, COLOR_BLUE);   init_pair(COL_WC, COLOR_WHITE, COLOR_CYAN);
-    init_pair(COL_WM, COLOR_WHITE, COLOR_MAGENTA);
-
-    init_pair(COL_KK, COLOR_BLACK, COLOR_BLACK);
-    #endif
 
     return true;
 }
@@ -123,7 +105,7 @@ void cursed_img_modify(TCursedImage img, int addr_x, int addr_y, char newsym, ch
     }
 }
 
-void cursed_clear(TCursedImage img)
+void cursed_clean(TCursedImage img)
 {
     if(img.width > 0 && img.heigth > 0)
         for(int idx = 0; idx < (img.width*img.heigth); idx++)
