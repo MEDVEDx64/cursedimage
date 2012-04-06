@@ -7,9 +7,9 @@ bool cursed_init_color()
 #endif
 #ifndef MONO
 
-	if(!start_color()) return false;
+    start_color();
 
-	/* Initializing color pairs */
+	/** Initializing color pairs **/
 // *K
 	init_pair(COL_KK, COLOR_BLACK,	COLOR_BLACK);
 	init_pair(COL_RK, COLOR_RED,	COLOR_BLACK);
