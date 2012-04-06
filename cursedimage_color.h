@@ -5,7 +5,7 @@
  *
  * How it stores the color:
  *	bits 1-2 - dummy;
- *	bitt 3-5 - foreground bool RGB color;
+ *	bits 3-5 - foreground bool RGB color;
  *	bits 6-8 - background bool RGB color.
  *		Only one byte is enough
  *
@@ -14,6 +14,7 @@
  * ============================================
  */
 
+#include <stdio.h>
 #ifndef __WIN32__
 #	include <ncurses.h>
 #endif
