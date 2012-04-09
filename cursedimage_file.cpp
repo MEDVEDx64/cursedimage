@@ -14,8 +14,8 @@ TCursedImage::TCursedImage()
 
 TCursedImage cursed_blank(unsigned char w, unsigned char h)
 {
-    TCursedImage result;
-    if(w>0 && h>0)
+    TCursedImage result = TCursedImage();
+    if(w&&h)
     {
         result.width    = w;
         result.heigth   = h;
