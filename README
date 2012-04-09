@@ -8,5 +8,3 @@ cursedimage.h uses libncurses for rendering
 and some more operations.
 
 0.4.x have a new colorpair system - cursedimage_color.h
-
- - MEDVEDx64, 06.04.2012
