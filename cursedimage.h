@@ -1,7 +1,7 @@
 /// die Cursed Library
  // MEDVEDx64, AlexX © Feb.-April 2012
 
- // Lib version 0.4.1 beta
+ // Lib version 0.4.2 beta
 /// Powered by the Force of the Dark Side
 
 #ifndef CURSEDIMAGE_H_INCLUDED
