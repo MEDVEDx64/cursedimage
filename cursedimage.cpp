@@ -74,7 +74,7 @@ void cursed_blit(TCursedImage src, TCursedImage dst, int x, int y, int x1, int y
     for(int idx = x1; idx < x1+w; idx++)
         for(int idy = y1; idy < y1+h; idy++)
             if(idx>=0 && idy>= 0 && idx<src.width && idy<src.heigth)
-                cursed_img_modify(dst,idx+x,idy+y,src.image[cursed_get_addr(idx,idy,src.width)]);
+                cursed_img_modify(dst,idx+x-x1,idy+y-y1,src.image[cursed_get_addr(idx,idy,src.width)]);
 }
 
 void cursed_flip(TCursedImage img, bool is_centered)
