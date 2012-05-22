@@ -1,13 +1,11 @@
 #include "cursedimage_color.h"
 
+#ifndef __WIN32__
 bool cursed_init_color()
 {
-#ifdef __WIN32__
-	return false;
-#endif
 #ifndef MONO
 
-    start_color();
+	start_color();
 
 	/** Initializing color pairs **/
 // *K
@@ -86,5 +84,6 @@ bool cursed_init_color()
 	return true;
 #else
 	return false;
-#endif
+#endif // MONO
 }
+#endif // __WIN32__
