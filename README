@@ -1,10 +1,4 @@
 Die Cursed Image library
 This is a pseudo-graphic image format instrumentary
-with SDL-like drawing system.
-Currently it's consists of <s>two</s> three parts;
-cursedimage_file.h is needed only for work
-with Cursed image format (.xcff),
-cursedimage.h uses libncurses for rendering
-and some more operations.
-
-0.4.x have a new colorpair system - cursedimage_color.h
+with SDL-like drawing system. It works with
+custom pseudo-graphic image format (.cmg).
