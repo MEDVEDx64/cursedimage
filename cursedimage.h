@@ -44,7 +44,7 @@ extern int cursed_init(int _nodelay);
 extern int cursed_draw_object(int x, int y, cursedimage *img);
 
 /*!
-\brief Object drawing. Obsolete, OK for for single-layered drawings.
+\brief Object drawing. Obsolete, not recommended to use.
 \param x    coordinate.
 \param y    coordinate.
 \param img  Pointer to object (image) which will be drawn.
