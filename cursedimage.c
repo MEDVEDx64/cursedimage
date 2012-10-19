@@ -22,7 +22,7 @@ int cursed_init(int _nodelay)
 	return SUCCESS;
 }
 
-int cursed_draw_object_old(int x, int y, t_cursedimage *img)
+int cursed_draw_object_old(int x, int y, cursedimage *img)
 {
 	RETURN_FAIL_IF_EMPTY(img);
     clear();
@@ -34,7 +34,7 @@ int cursed_draw_object_old(int x, int y, t_cursedimage *img)
     return SUCCESS;
 }
 
-int cursed_draw_object(int x, int y, t_cursedimage *img)
+int cursed_draw_object(int x, int y, cursedimage *img)
 {
 	RETURN_FAIL_IF_EMPTY(img);
 	int idx, idy;
@@ -48,7 +48,7 @@ int cursed_draw_object(int x, int y, t_cursedimage *img)
 	return SUCCESS;
 }
 
-int cursed_blit(t_cursedimage *src, t_cursedimage *dst, int x, int y)
+int cursed_blit(cursedimage *src, cursedimage *dst, int x, int y)
 {
     RETURN_FAIL_IF_EMPTY(src);
     RETURN_FAIL_IF_EMPTY(dst);
@@ -59,7 +59,7 @@ int cursed_blit(t_cursedimage *src, t_cursedimage *dst, int x, int y)
     return SUCCESS;
 }
 
-int cursed_blit_rect(t_cursedimage *src, t_cursedimage *dst, int x, int y, int x1, int y1, unsigned int w, unsigned int h)
+int cursed_blit_rect(cursedimage *src, cursedimage *dst, int x, int y, int x1, int y1, unsigned int w, unsigned int h)
 {
     RETURN_FAIL_IF_EMPTY(src);
     RETURN_FAIL_IF_EMPTY(dst);
@@ -72,7 +72,7 @@ int cursed_blit_rect(t_cursedimage *src, t_cursedimage *dst, int x, int y, int x
     return SUCCESS;
 }
 
-int cursed_flip(t_cursedimage *img, int is_centered)
+int cursed_flip(cursedimage *img, int is_centered)
 {
     int result;
 	if(is_centered)
@@ -82,7 +82,7 @@ int cursed_flip(t_cursedimage *img, int is_centered)
     return result;
 }
 
-int cursed_img_modify(t_cursedimage *img, int x, int y, char newsym, char newcolorpair)
+int cursed_img_modify(cursedimage *img, int x, int y, char newsym, char newcolorpair)
 {
     RETURN_FAIL_IF_EMPTY(img);
 	if(x < img->width && y < img->height)
@@ -94,7 +94,7 @@ int cursed_img_modify(t_cursedimage *img, int x, int y, char newsym, char newcol
 	return FAIL;
 }
 
-int cursed_clean(t_cursedimage *img)
+int cursed_clean(cursedimage *img)
 {
 	RETURN_FAIL_IF_EMPTY(img);
 	int idx;
@@ -106,11 +106,11 @@ int cursed_clean(t_cursedimage *img)
     return SUCCESS;
 }
 
-int cursed_setres(t_cursedimage *img, unsigned int w, unsigned int h)
+int cursed_setres(cursedimage *img, unsigned int w, unsigned int h)
 {
     if(!w || !h || img == NULL) return FAIL;
     if(!CURSED_MAGIC_CHECK(img) || img->image == NULL) return FAIL;
-    t_cursedimage *buf = cursed_imgcopy(img);
+    cursedimage *buf = cursed_imgcopy(img);
     cursed_imgfree(img);
     img = cursed_blank(w,h);
     cursed_blit_rect(buf,img,0,0,0,0,w,h);
@@ -123,10 +123,10 @@ void cursed_quit()
 	endwin();
 }
 
-int cursed_rect(t_cursedimage *img, int x, int y, unsigned int w, unsigned int h, char sym, char colorpair)
+int cursed_rect(cursedimage *img, int x, int y, unsigned int w, unsigned int h, char sym, char colorpair)
 {
     RETURN_FAIL_IF_EMPTY(img);
-	t_cursedimage *result = cursed_blank(w,h);
+	cursedimage *result = cursed_blank(w,h);
 	int idx, idy;
 	for(idx = 0; idx < w; idx++)
 		for(idy = 0; idy < h; idy++)

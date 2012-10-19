@@ -6,15 +6,15 @@
 #include <stdint.h>
 #include "cursedimage_file.h"
 
-t_cursedimage *cursed_blank(unsigned char w, unsigned char h)
+cursedimage *cursed_blank(unsigned char w, unsigned char h)
 {
     if(!w||!h) return NULL;
-	t_cursedimage *result = (t_cursedimage*)malloc(sizeof(t_cursedimage));
+	cursedimage *result = (cursedimage*)malloc(sizeof(cursedimage));
     result->magic = CURSED_MAGIC;
     result->version = CURSED_FORMAT_VERSION;
     result->width = w;
     result->height = h;
-    result->image = (t_cursedchar*)malloc(CURSED_BODY_LENGTH(result));
+    result->image = (cursedchar*)malloc(CURSED_BODY_LENGTH(result));
     int i; for(i = 0; i < CURSED_BODY_CHARS(result); i++)
 	{
 	    result->image[i].colorpair   = CURSED_DEFAULT_COLORPAIR;
@@ -23,7 +23,7 @@ t_cursedimage *cursed_blank(unsigned char w, unsigned char h)
 	return result;
 }
 
-int cursed_empty(t_cursedimage *img)
+int cursed_empty(cursedimage *img)
 {
     if(img == NULL) return -1;
     else if(img->image == NULL) return -1;
@@ -32,7 +32,7 @@ int cursed_empty(t_cursedimage *img)
 	return 1;
 }
 
-t_cursedimage *cursed_imgload(const char* fname)
+cursedimage *cursed_imgload(const char* fname)
 {
 	FILE* in;
 	if((in = fopen(fname,"rb")) == NULL) return NULL;
@@ -43,7 +43,7 @@ t_cursedimage *cursed_imgload(const char* fname)
 	rewind(in);
 
 	if(fsize <= CURSED_HEADER_LENGTH) return NULL;
-    t_cursedimage *out = (t_cursedimage*)malloc(sizeof(t_cursedimage));
+    cursedimage *out = (cursedimage*)malloc(sizeof(cursedimage));
     if(fread(out, CURSED_HEADER_LENGTH, 1, in));
     if(out->magic != CURSED_MAGIC || out->version != CURSED_FORMAT_VERSION || fsize != CURSED_FILE_LENGTH(out))
     {
@@ -52,13 +52,13 @@ t_cursedimage *cursed_imgload(const char* fname)
         return NULL;
     }
 
-    out->image = (t_cursedchar*)malloc(fsize-CURSED_HEADER_LENGTH);
+    out->image = (cursedchar*)malloc(fsize-CURSED_HEADER_LENGTH);
     if(fread(out->image, CURSED_BODY_LENGTH(out), 1, in));
 	fclose(in);
 	return out;
 }
 
-int cursed_imgsave(const char* fname, t_cursedimage *img)
+int cursed_imgsave(const char* fname, cursedimage *img)
 {
     if(fname == NULL || img == NULL) return -1;
 	FILE* out;
@@ -71,11 +71,11 @@ int cursed_imgsave(const char* fname, t_cursedimage *img)
 	return 0;
 }
 
-t_cursedimage *cursed_imgcopy(t_cursedimage *img)
+cursedimage *cursed_imgcopy(cursedimage *img)
 {
     if(img == NULL) return NULL;
     if(!CURSED_MAGIC_CHECK(img)) return NULL;
-    t_cursedimage *out = cursed_blank(img->width, img->height);
+    cursedimage *out = cursed_blank(img->width, img->height);
     memcpy(out, img, CURSED_HEADER_LENGTH);
     memcpy(out->image, img->image, CURSED_BODY_LENGTH(img));
     return out;

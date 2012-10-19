@@ -41,7 +41,7 @@ extern int cursed_init(int _nodelay);
 \param img  Pointer to object (image) which will be drawn.
 \returns    0 on success, -1 on failure.
 */
-extern int cursed_draw_object(int x, int y, t_cursedimage *img);
+extern int cursed_draw_object(int x, int y, cursedimage *img);
 
 /*!
 \brief Object drawing. Obsolete, OK for for single-layered drawings.
@@ -50,7 +50,7 @@ extern int cursed_draw_object(int x, int y, t_cursedimage *img);
 \param img  Pointer to object (image) which will be drawn.
 \returns    0 on success, -1 on failure.
 */
-extern int cursed_draw_object_old(int x, int y, t_cursedimage *img);
+extern int cursed_draw_object_old(int x, int y, cursedimage *img);
 
 /*!
 \brief          Changes a symbol and it`s color at desired coordinates.
@@ -61,7 +61,7 @@ extern int cursed_draw_object_old(int x, int y, t_cursedimage *img);
 \param newcolorpair     Color to replace an old one at addr_x, addr_y coords.
 \returns                0 on success, -1 on failure.
 */
-extern int cursed_img_modify(t_cursedimage *img, int x, int y, char newsym, char newcolorpair);
+extern int cursed_img_modify(cursedimage *img, int x, int y, char newsym, char newcolorpair);
 
 /*!
 \brief      Takes an area of the source image (or entrie image) and pastes it to the destination image at desired coords.
@@ -75,8 +75,8 @@ extern int cursed_img_modify(t_cursedimage *img, int x, int y, char newsym, char
 \param h    Height of the area rectangle to be copied from source.
 \returns    0 on success, -1 on failure.
 */
-extern int cursed_blit(t_cursedimage *src, t_cursedimage *dst, int x, int y);
-extern int cursed_blit_rect(t_cursedimage *src, t_cursedimage *dst, int x, int y, int x1, int y1, unsigned int w, unsigned int h);
+extern int cursed_blit(cursedimage *src, cursedimage *dst, int x, int y);
+extern int cursed_blit_rect(cursedimage *src, cursedimage *dst, int x, int y, int x1, int y1, unsigned int w, unsigned int h);
 
 /*!
 \brief              Draws an image. It calls cursed_draw_object() with predefined coords.
@@ -84,14 +84,14 @@ extern int cursed_blit_rect(t_cursedimage *src, t_cursedimage *dst, int x, int y
 \param is_centered  If != 0, image will be drawn at the screen`s center; else at 0,0.
 \returns            0 on success, -1 on failure.
 */
-extern int cursed_flip(t_cursedimage *img, int is_centered);
+extern int cursed_flip(cursedimage *img, int is_centered);
 
 /*!
 \brief      Erases the target image, but doesn't changes it`s resolution.
 \param img  Pointer to target image.
 \returns    0 on success, -1 on failure.
 */
-extern int cursed_clean(t_cursedimage *img);
+extern int cursed_clean(cursedimage *img);
 
 /*!
 \brief      Changes resolution of the source image.
@@ -99,7 +99,7 @@ extern int cursed_clean(t_cursedimage *img);
 \param h    New height.
 \returns    0 on success, -1 on failure.
 */
-extern int cursed_setres(t_cursedimage *img, unsigned int w, unsigned int h);
+extern int cursed_setres(cursedimage *img, unsigned int w, unsigned int h);
 
 /*!
 \brief      Just calls endwin() to leave ncurses mode. Obsolete.
@@ -118,7 +118,7 @@ extern void cursed_quit();
 \param colorpair    Desired color.
 \returns            0 on success, -1 on fail.
 */
-extern int cursed_rect(t_cursedimage *img, int x, int y, unsigned int w, unsigned int h, char sym, char colorpair);
+extern int cursed_rect(cursedimage *img, int x, int y, unsigned int w, unsigned int h, char sym, char colorpair);
 
 #ifdef __cplusplus
 }
