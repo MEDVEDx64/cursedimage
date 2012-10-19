@@ -1,4 +1,6 @@
-Die Cursed Image library
+The Cursed Image library
 This is a pseudo-graphic image format instrumentary
 with SDL-like drawing system. It works with
 custom pseudo-graphic image format (.cmg).
+
+Comes under the terms of GNU GPL.

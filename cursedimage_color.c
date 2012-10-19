@@ -1,9 +1,13 @@
+/** cursedimage_color.c **/
+/*  Part of the Cursed Image library.
+    Comes under the terms of GNU GPL.
+        - MEDVEDx64, 2012.10.19 */
+
 #include "cursedimage_color.h"
 
-#ifndef __WIN32__
-bool cursed_init_color()
+int cursed_init_color()
 {
-#ifndef MONO
+#ifndef __WIN32__
 
 	start_color();
 
@@ -81,9 +85,8 @@ bool cursed_init_color()
 	init_pair(COL_MW, COLOR_MAGENTA,COLOR_WHITE);
 	init_pair(COL_WW, COLOR_WHITE,	COLOR_WHITE);
 
-	return true;
+	return 0;
 #else
-	return false;
-#endif // MONO
-}
+	return -1;
 #endif // __WIN32__
+}

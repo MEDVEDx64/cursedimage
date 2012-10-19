@@ -1,18 +1,22 @@
 /*
- * ============================================
+ * ===============================================
  *
- * Cursed Color
+ *  Cursed Color, part of the Cursed Image library.
  *
- * How it stores the color:
- *	bits 6-7 - dummy;
- *	bits 3-5 - foreground bool RGB color;
- *	bits 0-2 - background bool RGB color.
- *		Only one byte is enough
+ *  How it stores the color:
+ *	    bits 6-7 - dummy;
+ *	    bits 3-5 - foreground bool RGB color;
+ *	    bits 0-2 - background bool RGB color.
+ *		    Only one byte is enough.
  *
- * MEDVEDx64, 2012.04.04,
- *    updated 2012.05.22
+ *  MEDVEDx64, 2012.04.04,
+ *          upd. 2012.05.22,
+ *          upd. 2012.10.19.
  *
- * ============================================
+ *
+ *  Comes under the terms of GNU GPL.
+ *
+ * ===============================================
  */
 
 #ifndef CURSEDIMAGE_COLOR_H
@@ -21,6 +25,10 @@
 #include <stdio.h>
 #ifndef __WIN32__
 #	include <ncurses.h>
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 /* Color definitions */
@@ -103,7 +111,12 @@ enum
 };
 
 #ifndef __WIN32__
-bool cursed_init_color();
+/* Returns 0 on success, -1 on failure */
+extern int cursed_init_color();
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif // CURSEDIMAGE_COLOR_H
