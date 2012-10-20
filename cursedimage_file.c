@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include "cursedimage_file.h"
 
-cursedimage *cursed_blank(unsigned char w, unsigned char h)
+cursedimage *cursed_blank(unsigned int w, unsigned int h)
 {
     if(!w||!h) return NULL;
 	cursedimage *result = (cursedimage*)malloc(sizeof(cursedimage));
@@ -15,7 +15,7 @@ cursedimage *cursed_blank(unsigned char w, unsigned char h)
     result->width = w;
     result->height = h;
     result->image = (cursedchar*)malloc(CURSED_BODY_LENGTH(result));
-    int i; for(i = 0; i < CURSED_BODY_CHARS(result); i++)
+    unsigned int i; for(i = 0; i < CURSED_BODY_CHARS(result); i++)
     {
         result->image[i].colorpair   = CURSED_DEFAULT_COLORPAIR;
         result->image[i].sym         = CURSED_DEFAULT_SYM;

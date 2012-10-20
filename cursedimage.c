@@ -1,7 +1,7 @@
 /** cursedimage.c **/
 /*  Part of the Cursed Image library.
     Comes under the terms of GNU GPL.
-        - MEDVEDx64, 2012.10.19 */
+        - MEDVEDx64, 2012.10.20 */
 
 #include "cursedimage.h"
 
@@ -37,7 +37,7 @@ int cursed_draw_object_old(int x, int y, cursedimage *img)
 int cursed_draw_object(int x, int y, cursedimage *img)
 {
     RETURN_FAIL_IF_EMPTY(img);
-    int idx, idy;
+    unsigned int idx, idy;
     for (idx = 0; idx < COLS ; idx++)
         for (idy = 0; idy < LINES; idy++)
             if (idx >= x && idx < x+img->width && idy >= y && idy<y+img->height)
@@ -52,10 +52,10 @@ int cursed_blit(cursedimage *src, cursedimage *dst, int x, int y)
 {
     RETURN_FAIL_IF_EMPTY(src);
     RETURN_FAIL_IF_EMPTY(dst);
-    int idx;
-	for(idx = 0; idx < CURSED_BODY_CHARS(src); idx++)
-		cursed_img_modify(dst, cursed_get_coord(0,idx,src->width)+x,
-			cursed_get_coord(1, idx,src->width)+y, src->image[idx].sym, src->image[idx].colorpair);
+    unsigned int idx;
+    for(idx = 0; idx < CURSED_BODY_CHARS(src); idx++)
+        cursed_img_modify(dst, cursed_get_coord(0,idx,src->width)+x,
+            cursed_get_coord(1, idx,src->width)+y, src->image[idx].sym, src->image[idx].colorpair);
     return SUCCESS;
 }
 
@@ -63,7 +63,7 @@ int cursed_blit_rect(cursedimage *src, cursedimage *dst, int x, int y, int x1, i
 {
     RETURN_FAIL_IF_EMPTY(src);
     RETURN_FAIL_IF_EMPTY(dst);
-    int idx, idy;
+    unsigned int idx, idy;
 	for(idx = x1; idx < x1+w; idx++)
 		for(idy = y1; idy < y1+h; idy++)
 			if(idx>=0 && idy>= 0 && idx<src->width && idy<src->height)
@@ -97,7 +97,7 @@ int cursed_img_modify(cursedimage *img, int x, int y, char newsym, char newcolor
 int cursed_clean(cursedimage *img)
 {
     RETURN_FAIL_IF_EMPTY(img);
-    int idx;
+    unsigned int idx;
     for(idx = 0; idx < CURSED_BODY_CHARS(img); idx++)
     {
         img->image[idx].sym          = CURSED_DEFAULT_SYM;
@@ -122,7 +122,7 @@ int cursed_rect(cursedimage *img, int x, int y, unsigned int w, unsigned int h, 
 {
     RETURN_FAIL_IF_EMPTY(img);
     cursedimage *result = cursed_blank(w,h);
-    int idx, idy;
+    unsigned int idx, idy;
     for(idx = 0; idx < w; idx++)
         for(idy = 0; idy < h; idy++)
             cursed_img_modify(result,idx,idy,sym,colorpair);

@@ -67,7 +67,7 @@ typedef struct
 \param h Blank image height.
 \returns pointer to a new image, NULL if input width or height == 0
 */
-extern cursedimage *cursed_blank(unsigned char w, unsigned char h);
+extern cursedimage *cursed_blank(unsigned int w, unsigned int h);
 
 /*!
 \brief Checks image for emptiness.
