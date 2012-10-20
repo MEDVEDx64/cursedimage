@@ -18,7 +18,7 @@ extern "C" {
 extern int cursed_get_coord(int y_coord, int pos, unsigned int w);
 /* Returns an address of symbol. */
 extern int cursed_get_addr(int x, int y, unsigned int w);
-/* Both of them requires to know your cursed image's width. */
+/* Both of them requires to know your image's width. */
 
 #ifdef __cplusplus
 }

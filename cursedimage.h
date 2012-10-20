@@ -1,9 +1,9 @@
 /*
 	the Cursed Image Library
-	MEDVEDx64, AlexX © Feb.-April 2012, Oct. 2012
+	MEDVEDx64, AlexX, Feb.-April 2012, Oct. 2012
 	Powered by the Force of the Dark Side
 
-	Cursed Image is a pseudo-graphic image
+	Cursed Image Library is a pseudo-graphic image
 	& file format API with SDL-like
 	drawing system.
 
@@ -28,7 +28,7 @@ extern "C" {
 #define CURSEDIMAGE_VERSION_MICRO   0
 
 /*!
-\brief  Inits ncurses and color pairs with some recommended params by default.
+\brief  Initializes ncurses and color pairs.
 \param _nodelay Decines, pause the program when calling getch() or no. Useful for games.
 \returns        0 on success, -1 on failure.
 */
@@ -53,7 +53,7 @@ extern int cursed_draw_object(int x, int y, cursedimage *img);
 extern int cursed_draw_object_old(int x, int y, cursedimage *img);
 
 /*!
-\brief          Changes a symbol and it`s color at desired coordinates.
+\brief          Changes a symbol and it's color at desired coordinates.
 \param img              Pointer to object (image) which will be modified
 \param x                coordinate at the target image.
 \param y                coordinate at the target image.
@@ -81,13 +81,13 @@ extern int cursed_blit_rect(cursedimage *src, cursedimage *dst, int x, int y, in
 /*!
 \brief              Draws an image. It calls cursed_draw_object() with predefined coords.
 \param img          Image to draw.
-\param is_centered  If != 0, image will be drawn at the screen`s center; else at 0,0.
+\param is_centered  If != 0, image will be drawn at the screen's center; else at 0,0.
 \returns            0 on success, -1 on failure.
 */
 extern int cursed_flip(cursedimage *img, int is_centered);
 
 /*!
-\brief      Erases the target image, but doesn't changes it`s resolution.
+\brief      Erases the target image, but doesn`t changes it's resolution.
 \param img  Pointer to target image.
 \returns    0 on success, -1 on failure.
 */
@@ -102,9 +102,9 @@ extern int cursed_clean(cursedimage *img);
 extern int cursed_setres(cursedimage *img, unsigned int w, unsigned int h);
 
 /*!
-\brief      Just calls endwin() to leave ncurses mode. Obsolete.
+\brief      Quits ncurses mode.
 */
-extern void cursed_quit();
+#define cursed_quit endwin
 
 /*!
 \brief      Draws a rectangle filled by desired symbol.

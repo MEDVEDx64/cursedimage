@@ -16,11 +16,11 @@ cursedimage *cursed_blank(unsigned char w, unsigned char h)
     result->height = h;
     result->image = (cursedchar*)malloc(CURSED_BODY_LENGTH(result));
     int i; for(i = 0; i < CURSED_BODY_CHARS(result); i++)
-	{
-	    result->image[i].colorpair   = CURSED_DEFAULT_COLORPAIR;
-	    result->image[i].sym         = CURSED_DEFAULT_SYM;
-	}
-	return result;
+    {
+        result->image[i].colorpair   = CURSED_DEFAULT_COLORPAIR;
+        result->image[i].sym         = CURSED_DEFAULT_SYM;
+    }
+    return result;
 }
 
 int cursed_empty(cursedimage *img)
@@ -34,15 +34,15 @@ int cursed_empty(cursedimage *img)
 
 cursedimage *cursed_imgload(const char* fname)
 {
-	FILE* in;
-	if((in = fopen(fname,"rb")) == NULL) return NULL;
+    FILE* in;
+    if((in = fopen(fname,"rb")) == NULL) return NULL;
 
-	long fsize;
-	fseek(in, 0, SEEK_END);
-	fsize = ftell(in);
-	rewind(in);
+    long fsize;
+    fseek(in, 0, SEEK_END);
+    fsize = ftell(in);
+    rewind(in);
 
-	if(fsize <= CURSED_HEADER_LENGTH) return NULL;
+    if(fsize <= CURSED_HEADER_LENGTH) return NULL;
     cursedimage *out = (cursedimage*)malloc(sizeof(cursedimage));
     if(fread(out, CURSED_HEADER_LENGTH, 1, in));
     if(out->magic != CURSED_MAGIC || out->version != CURSED_FORMAT_VERSION || fsize != CURSED_FILE_LENGTH(out))
@@ -54,21 +54,21 @@ cursedimage *cursed_imgload(const char* fname)
 
     out->image = (cursedchar*)malloc(fsize-CURSED_HEADER_LENGTH);
     if(fread(out->image, CURSED_BODY_LENGTH(out), 1, in));
-	fclose(in);
-	return out;
+    fclose(in);
+    return out;
 }
 
 int cursed_imgsave(const char* fname, cursedimage *img)
 {
     if(fname == NULL || img == NULL) return -1;
-	FILE* out;
-	if((out = fopen(fname,"wb")) == NULL) return -1;
+    FILE* out;
+    if((out = fopen(fname,"wb")) == NULL) return -1;
     if(!CURSED_MAGIC_CHECK(img)) return -1;
 
     fwrite(img, CURSED_HEADER_LENGTH, 1, out);
     fwrite(img->image, CURSED_BODY_LENGTH(img), 1, out);
-	fclose(out);
-	return 0;
+    fclose(out);
+    return 0;
 }
 
 cursedimage *cursed_imgcopy(cursedimage *img)

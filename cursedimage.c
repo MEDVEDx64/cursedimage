@@ -24,7 +24,7 @@ int cursed_init(int _nodelay)
 
 int cursed_draw_object_old(int x, int y, cursedimage *img)
 {
-	RETURN_FAIL_IF_EMPTY(img);
+    RETURN_FAIL_IF_EMPTY(img);
     clear();
     unsigned int idx;
     for(idx = 0; idx < (img->height*img->width); idx++)
@@ -36,8 +36,8 @@ int cursed_draw_object_old(int x, int y, cursedimage *img)
 
 int cursed_draw_object(int x, int y, cursedimage *img)
 {
-	RETURN_FAIL_IF_EMPTY(img);
-	int idx, idy;
+    RETURN_FAIL_IF_EMPTY(img);
+    int idx, idy;
     for (idx = 0; idx < COLS ; idx++)
         for (idy = 0; idy < LINES; idy++)
             if (idx >= x && idx < x+img->width && idy >= y && idy<y+img->height)
@@ -85,19 +85,19 @@ int cursed_flip(cursedimage *img, int is_centered)
 int cursed_img_modify(cursedimage *img, int x, int y, char newsym, char newcolorpair)
 {
     RETURN_FAIL_IF_EMPTY(img);
-	if(x < img->width && y < img->height)
-	{
-		img->image[cursed_get_addr(x,y,img->width)].sym = newsym;
-		img->image[cursed_get_addr(x,y,img->width)].colorpair = newcolorpair;
-		return SUCCESS;
-	}
-	return FAIL;
+    if(x < img->width && y < img->height)
+    {
+        img->image[cursed_get_addr(x,y,img->width)].sym = newsym;
+        img->image[cursed_get_addr(x,y,img->width)].colorpair = newcolorpair;
+        return SUCCESS;
+    }
+    return FAIL;
 }
 
 int cursed_clean(cursedimage *img)
 {
-	RETURN_FAIL_IF_EMPTY(img);
-	int idx;
+    RETURN_FAIL_IF_EMPTY(img);
+    int idx;
     for(idx = 0; idx < CURSED_BODY_CHARS(img); idx++)
     {
         img->image[idx].sym          = CURSED_DEFAULT_SYM;
@@ -118,21 +118,16 @@ int cursed_setres(cursedimage *img, unsigned int w, unsigned int h)
     return SUCCESS;
 }
 
-void cursed_quit()
-{
-	endwin();
-}
-
 int cursed_rect(cursedimage *img, int x, int y, unsigned int w, unsigned int h, char sym, char colorpair)
 {
     RETURN_FAIL_IF_EMPTY(img);
-	cursedimage *result = cursed_blank(w,h);
-	int idx, idy;
-	for(idx = 0; idx < w; idx++)
-		for(idy = 0; idy < h; idy++)
-			cursed_img_modify(result,idx,idy,sym,colorpair);
+    cursedimage *result = cursed_blank(w,h);
+    int idx, idy;
+    for(idx = 0; idx < w; idx++)
+        for(idy = 0; idy < h; idy++)
+            cursed_img_modify(result,idx,idy,sym,colorpair);
 
-	cursed_blit(result,img,x,y);
-	cursed_imgfree(result);
-	return SUCCESS;
+    cursed_blit(result,img,x,y);
+    cursed_imgfree(result);
+    return SUCCESS;
 }

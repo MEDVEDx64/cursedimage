@@ -22,8 +22,7 @@ extern "C" {
 
 /*
   Format version 0x11, format header is _IMG.
-  It`s recommended to use ".cmg" extension
-  for Cursed Image files.
+  It`s recommended to use ".cmg" extension for Cursed Image files.
 */
 
 #define CURSED_MAGIC                0x474D495F
@@ -40,8 +39,8 @@ extern "C" {
 #define CURSED_FILE_LENGTH(img)     CURSED_HEADER_LENGTH+CURSED_BODY_LENGTH(img)
 
 /*
-cursedchar type definition
-Features colorpair and symbol chars.
+  cursedchar type definition
+  Features colorpair and symbol chars.
 */
 typedef struct
 {
@@ -50,16 +49,16 @@ typedef struct
 } cursedchar;
 
 /*
-cursedimage type definition.
-Have width and height fields,
-consists of t_cursedchars.
+  cursedimage type definition.
+  Have width and height fields,
+  consists of cursedchars.
 */
 typedef struct
 {
     CURSED_MAGIC_T  magic;
     unsigned char   version;
-	unsigned int    width, height;
-	cursedchar    *image;
+    unsigned int    width, height;
+    cursedchar      *image;
 } cursedimage;
 
 /*!
